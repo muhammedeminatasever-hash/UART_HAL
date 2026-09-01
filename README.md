@@ -46,13 +46,6 @@ Sadece tek yönlü haberleşme kullanıldığından PC5 hatları bağlanmasa da 
 
 Her iki dosya da STM32CubeIDE ile oluşturulmuş standart proje iskeletindeki `main.c` dosyasının yerine konacak şekilde hazırlanmıştır (`USER CODE BEGIN/END` blokları korunmuştur).
 
-## Bilinen düzeltmeler
-
-Bu sürüm, önceki bir taslakta bulunan iki sorunu giderir:
-
-- **F072RB tarafında derleme hatası:** `MX_USART3_UART_Init()` ile `huart3` init ediliyor, ancak alım ve callback çağrıları tanımsız bir `huart2` değişkenine referans veriyordu (`undefined reference to huart2`). Tüm çağrılar `huart3`'e ve callback kontrolü `USART3` instance'ına düzeltildi.
-- **F446RE tarafında yanıltıcı yorum:** Dosya başlığında "USART2 TX, PA2" yazıyordu, ancak kod ve CubeMX ayarı fiilen USART3 (PB10/PC5) kullanıyordu. Yorum gerçek pin atamasıyla tutarlı hale getirildi; kodun işlevsel kısmında değişiklik yapılmadı.
-
 ## Kurulum
 
 1. Her iki proje için de STM32CubeIDE'de ilgili Nucleo kartına (F446RE / F072RB) uygun bir proje oluşturun ya da mevcut `.ioc` dosyanızın USART3 ayarlarının yukarıdaki tabloyla eşleştiğini doğrulayın (Baud: 115200, 8N1, TX/RX pinleri).
